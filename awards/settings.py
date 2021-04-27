@@ -11,10 +11,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-from decouple import config,Csv
 import django_heroku
 import dj_database_url
-
+from decouple import config,Csv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-MODE=config("MODE", default="dev")
+#MODE=config("MODE", default="dev")
 SECRET_KEY = '12345'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -38,14 +37,13 @@ DEBUG = True
 INSTALLED_APPS = [
     'award',
     'bootstrap3',
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
- 
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -83,8 +81,28 @@ WSGI_APPLICATION = 'awards.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-
+#MODE=config("MODE", default="dev")
+SECRET_KEY = '12345'
+DEBUG = True
 # development
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'db_development',
+        'USER': "db_user",
+        'PASSWORD': 'DB_PASSWORD',
+    }
+}
+# production
+#else:
+#DATABASES = {
+ #  'default': dj_database_url.config(
+   #     default='DATABASE_URL'
+  #     )
+   #}
+
+#db_from_env = dj_database_url.config(conn_max_age=500)
+#DATABASES['default'].update(db_from_env)
 
 
 
